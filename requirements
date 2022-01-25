@@ -1,0 +1,6 @@
+pymongo
+datetime
+dnspython
+pgsync
+yaml
+os

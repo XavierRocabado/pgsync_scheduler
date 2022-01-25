@@ -1,0 +1,30 @@
+---
+# source database URL
+# database URLs take the format of:
+#   postgres://user:password@host:port/dbname
+#
+# we recommend a command which outputs a database URL
+# so sensitive information is not included in this file
+#
+# we *highly recommend* you use sslmode=verify-full when possible
+# see https://ankane.org/postgres-sslmode-explained for more info
+
+# production
+from: $(heroku config:get postgresql://postgres:KEYS)?sslmode=verify-full
+
+# destination database URL
+
+# staging
+to: postgresql://postgres:&eZcTdnbJRU9@db.sjxxojjhfxxjzacdowiq.supabase.co:5432/postgres
+
+# sync specific schemas
+schemas:
+  - public
+
+to_safe: true
+exclude:
+  - buckets
+# pgsync product_categories_level_1,product_categories_level_2,product_categories_level_3,product_categories_level_4,product_categories_level_5,product_categories_level_6,product_categories_level_7,products_brands,products,products_presentations,items --jobs 1
+# pgsync stores,stores_employees,couriers,couriers_locations,coupon_codes,employees,sellers,users,orders --jobs 1
+
+# pgsync --defer-constraints-v2 --exclude buckets
